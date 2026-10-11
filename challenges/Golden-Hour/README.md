@@ -1,18 +1,18 @@
-\# KPMG CTF Writeup — Golden Hour
+# KPMG CTF Writeup — Golden Hour
 
 
 
-\*\*Category:\*\* OSINT / Git Forensics / Steganography  
+**Category:** OSINT / Git Forensics / Steganography  
 
-\*\*Challenge:\*\* Golden Hour  
+**Challenge:** Golden Hour  
 
-\*\*Points:\*\* 30  
+**Points:** 30  
 
-\*\*Objective:\*\* Recover the hidden flag by investigating the challenge author's online footprint, unlocking a browser-based vault, and analyzing the downloaded image.
+**Objective:** Recover the hidden flag by investigating the challenge author's online footprint, unlocking a browser-based vault, and analyzing the downloaded image.
 
 
 
-\## 1. Challenge Description
+## 1. Challenge Description
 
 
 
@@ -28,7 +28,7 @@ The challenge website directs the user to a personal portfolio and journal, with
 
 
 
-\*\*Challenge URL:\*\*  
+**Challenge URL:**  
 
 https://kicyber-a0d9510e941b-goldenhour-0-0.chals.io/#journal
 
@@ -38,7 +38,7 @@ The wording suggests investigating abandoned content, deleted references, and hi
 
 
 
-\## 2. Initial Reconnaissance
+## 2. Initial Reconnaissance
 
 
 
@@ -72,7 +72,7 @@ The challenge description's reference to things that are no longer pointed to su
 
 
 
-\## 3. Investigating the GitHub Repositories
+## 3. Investigating the GitHub Repositories
 
 
 
@@ -92,7 +92,7 @@ This was an intentional decoy.
 
 
 
-\*\*Lesson:\*\* A flag-shaped string is not necessarily the correct flag. Always examine its context and verify it against the challenge.
+**Lesson:** A flag-shaped string is not necessarily the correct flag. Always examine its context and verify it against the challenge.
 
 
 
@@ -100,7 +100,7 @@ The investigation then continued through the creator's online footprint and hist
 
 
 
-\## 4. Recovering the Vault Passphrase
+## 4. Recovering the Vault Passphrase
 
 
 
@@ -112,7 +112,7 @@ The post's comments contained encoded strings, including:
 
 
 
-\*\*Base64 string 1\*\*
+**Base64 string 1**
 
 
 
@@ -132,11 +132,11 @@ Interpreting the leetspeak gave:
 
 
 
-\*\*"you are almost there"\*\*
+**"you are almost there"**
 
 
 
-\*\*Base64 string 2\*\*
+**Base64 string 2**
 
 
 
@@ -166,7 +166,7 @@ The accompanying comment suggested that the author sometimes left notes in their
 
 
 
-The word \*\*`driftwood`\*\* was the correct vault passphrase.
+The word **`driftwood`** was the correct vault passphrase.
 
 
 
@@ -174,7 +174,7 @@ Entering it into the vault unlocked the next stage.
 
 
 
-\## 5. Downloading the Image
+## 5. Downloading the Image
 
 
 
@@ -198,7 +198,7 @@ Since the image was available locally, the next step was to inspect its metadata
 
 
 
-\## 6. Analyzing the JPEG Metadata
+## 6. Analyzing the JPEG Metadata
 
 
 
@@ -260,7 +260,7 @@ This was the actual flag recovered from the JPEG metadata.
 
 
 
-\### Why the decoy was easy to miss
+### Why the decoy was easy to miss
 
 
 
@@ -268,7 +268,7 @@ The flag embedded in the image was visually similar to the decoy found in `old.e
 
 
 
-\*\*Decoy — `old.env`\*\*
+**Decoy — `old.env`**
 
 
 
@@ -276,7 +276,7 @@ The flag embedded in the image was visually similar to the decoy found in `old.e
 
 
 
-\*\*Actual flag — JPEG EXIF\*\*
+**Actual flag — JPEG EXIF**
 
 
 
@@ -294,7 +294,7 @@ The critical difference is in `drifted`:
 
 
 
-The actual flag uses the digit \*\*`3`\*\* in place of the letter \*\*`e`\*\* in the final part of the word.
+The actual flag uses the digit **`3`** in place of the letter **`e`** in the final part of the word.
 
 
 
@@ -302,7 +302,7 @@ This small difference is why copying the first flag without checking the later e
 
 
 
-\## 7. Final Flag
+## 7. Final Flag
 
 
 
@@ -314,7 +314,7 @@ The flag recovered from the image's EXIF metadata was:
 
 
 
-\## 8. Key Takeaways
+## 8. Key Takeaways
 
 
 
@@ -322,21 +322,21 @@ This challenge combined several investigation techniques:
 
 
 
-1\. \*\*OSINT:\*\* Examining the creator's website, GitHub repositories, and historical online content.
+1\. **OSINT:** Examining the creator's website, GitHub repositories, and historical online content.
 
-2\. \*\*Git forensics:\*\* Following clues about abandoned or deleted content rather than relying only on current repository files.
+2\. **Git forensics:** Following clues about abandoned or deleted content rather than relying only on current repository files.
 
-3\. \*\*Encoding analysis:\*\* Decoding Base64 and Base32 strings and interpreting leetspeak.
+3\. **Encoding analysis:** Decoding Base64 and Base32 strings and interpreting leetspeak.
 
-4\. \*\*Passphrase recovery:\*\* Using the decoded word `driftwood` to unlock the vault.
+4\. **Passphrase recovery:** Using the decoded word `driftwood` to unlock the vault.
 
-5\. \*\*File forensics:\*\* Inspecting a downloaded JPEG's EXIF metadata with Python and Pillow.
+5\. **File forensics:** Inspecting a downloaded JPEG's EXIF metadata with Python and Pillow.
 
-6\. \*\*Decoy recognition:\*\* Comparing similar flag strings character by character instead of assuming the first discovered flag was correct.
+6\. **Decoy recognition:** Comparing similar flag strings character by character instead of assuming the first discovered flag was correct.
 
 
 
-\## Conclusion
+## Conclusion
 
 
 
@@ -348,5 +348,5 @@ The decisive step was examining the original image file rather than relying only
 
 
 
-\*\*Final flag:\*\* `KPMG\_CTF{n0va\_dr1ft3d\_h0m3}`
+**Final flag:** `KPMG\_CTF{n0va\_dr1ft3d\_h0m3}`
 
